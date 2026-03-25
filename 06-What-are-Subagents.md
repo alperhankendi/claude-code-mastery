@@ -24,8 +24,6 @@ Claude Code ile çalışırken her mesaj, dosya okuma, tool çıktısı ve önce
 
 Kısaca: context window'un gereksiz bilgiyle dolması = context bloat. Subagent'ların varlık sebebi bu.
 
-
-
 **Key Insight:** Keşif ve özelleşmiş işleri delegation layer'a itin, core layer'ı yalnızca orkestrasyon için kullanın.
 
 ## Agent System Architecture
@@ -34,26 +32,26 @@ Main Agent, tool çağrıları üzerinden subagent'lar başlatır, context'i yö
 
 ```mermaid
 graph TD
-    MAIN["🧠 Main Agent<br/>Sonnet / Opus"] --> CTX["💾 Context Manager"]
+    MAIN["Main Agent<br/>Sonnet / Opus"] --> CTX["Context Manager"]
     CTX --> COMPACT["Auto-Compaction"]
     CTX --> MEM["Memory Manager<br/>user / project / local"]
 
-    MAIN --> TOOLS["🔧 Tool Execution"]
+    MAIN --> TOOLS["Tool Execution"]
     TOOLS --> BASH["BashTool"]
     TOOLS --> FILE["FileRead/Write/<br/>EditTool"]
     TOOLS --> TASK["TaskTool"]
     TOOLS --> MCPT["MCP Tools"]
 
-    BASH --> PERM{"🛡️ Permission<br/>Classifier"}
+    BASH --> PERM{"Permission<br/>Classifier"}
     FILE --> PERM
     PERM -- "allow" --> EXEC["Execute"]
     PERM -- "ask" --> ASK["User Approval"]
     PERM -- "deny" --> BLOCK["Block"]
 
-    TASK --> SPAWN["🤖 Subagent Spawner"]
-    SPAWN --> TEAMS["👥 Agent Teams"]
+    TASK --> SPAWN["Subagent Spawner"]
+    SPAWN --> TEAMS["Agent Teams"]
 
-    MAIN --> PLUGINS["🔌 Plugin Loader"]
+    MAIN --> PLUGINS["Plugin Loader"]
     PLUGINS --> HOOKS["Hook System"]
     PLUGINS --> SKILLS["Skill Loader"]
     PLUGINS --> MCPSRV["MCP Server Manager"]
@@ -73,8 +71,8 @@ Main agent, **TaskTool** çağırarak subagent başlatır. Subagent bağımsız 
 
 ```mermaid
 graph LR
-    MAIN["🧠 Main Agent"] -- "TaskTool<br/>çağrısı" --> TASK["📋 Task Tool"]
-    TASK -- "parametreler" --> SUB["🤖 Subagent"]
+    MAIN["Main Agent"] -- "TaskTool<br/>çağrısı" --> TASK["Task Tool"]
+    TASK -- "parametreler" --> SUB["Subagent"]
     SUB -- "TaskUpdate<br/>ilerleme raporu" --> MAIN
     SUB -- "TaskOutputTool<br/>son sonuç" --> MAIN
 
@@ -85,27 +83,27 @@ graph LR
 
 **Task Tool parametreleri:**
 
-| Parametre | Açıklama |
-|-----------|----------|
-| `description` | Doğal dil görev tanımı |
-| `agent_type` | Kullanılacak agent profili (explore, plan, general) |
-| `model` | Subagent için model override |
-| `allowed_tools` | İzin verilen tool alt kümesi |
-| `permission_mode` | Permission davranış override'ı |
-| `context` | Context devralma modu (ör. `fork`) |
+| Parametre         | Açıklama                                            |
+| ----------------- | --------------------------------------------------- |
+| `description`     | Doğal dil görev tanımı                              |
+| `agent_type`      | Kullanılacak agent profili (explore, plan, general) |
+| `model`           | Subagent için model override                        |
+| `allowed_tools`   | İzin verilen tool alt kümesi                        |
+| `permission_mode` | Permission davranış override'ı                      |
+| `context`         | Context devralma modu (ör. `fork`)                  |
 
 **Execution modes:**
 
-| Mod | Çalışma Dizini | Kullanım |
-|-----|---------------|----------|
-| Default | Main agent ile paylaşımlı | Basit paralel görevler |
-| `isolation: worktree` | Geçici git worktree | Dosya izolasyonu gereken görevler |
-| `background: true` | Her iki mod | Non-blocking, uzun süren görevler |
+| Mod                   | Çalışma Dizini            | Kullanım                          |
+| --------------------- | ------------------------- | --------------------------------- |
+| Default               | Main agent ile paylaşımlı | Basit paralel görevler            |
+| `isolation: worktree` | Geçici git worktree       | Dosya izolasyonu gereken görevler |
+| `background: true`    | Her iki mod               | Non-blocking, uzun süren görevler |
 
 **İletişim mekanizmaları:**
 
-- **TaskUpdate**: Subagent tamamlanmadan ilerleme raporlar. Aktif görev listesinden görev silmek için de kullanılır.
-- **TaskOutputTool**: Son sonuçları teslim eder — yanıt özeti (UI'da max 3 satır), tam transcript dosya referansı, metrikler (token sayısı, tool kullanımı, süre).
+* **TaskUpdate**: Subagent tamamlanmadan ilerleme raporlar. Aktif görev listesinden görev silmek için de kullanılır.
+* **TaskOutputTool**: Son sonuçları teslim eder — yanıt özeti (UI'da max 3 satır), tam transcript dosya referansı, metrikler (token sayısı, tool kullanımı, süre).
 
 **Subagent lifecycle hook'ları:**
 
@@ -118,10 +116,10 @@ Hata durumunda `StopFailure`, takım üyesi bekliyorsa `TeammateIdle` tetiklenir
 ```mermaid
 graph LR
     subgraph TYPES["Subagent Tipleri"]
-        EXP["🔍 Explore<br/>Ara, analiz et<br/>değiştirme"]
-        PLAN["📋 Plan<br/>Yaklaşım tasarla<br/>çalıştırma"]
-        GEN["⚙️ General<br/>Tam yetenekli<br/>izole agent"]
-        CUSTOM["🎯 Custom<br/>Kullanıcı tanımlı<br/>özel uzman"]
+        EXP["Explore<br/>Ara, analiz et<br/>degistirme"]
+        PLAN["Plan<br/>Yaklasim tasarla<br/>calistirma"]
+        GEN["General<br/>Tam yetenekli<br/>izole agent"]
+        CUSTOM["Custom<br/>Kullanici tanimli<br/>ozel uzman"]
     end
 
     style EXP fill:#132213,stroke:#22c55e,stroke-width:2px,color:#4ade80
@@ -189,9 +187,9 @@ Temel bulgular:
 
 ```mermaid
 graph LR
-    E["🔍 Explore<br/>Keşfet"] --> P["📋 Plan<br/>Planla"]
-    P --> I["⚙️ Implement<br/>Uygula"]
-    I --> T["✅ Test<br/>Doğrula"]
+    E["Explore<br/>Kesfet"] --> P["Plan<br/>Planla"]
+    P --> I["Implement<br/>Uygula"]
+    I --> T["Test<br/>Dogrula"]
 
     style E fill:#132213,stroke:#22c55e,stroke-width:1px,color:#4ade80
     style P fill:#0f2027,stroke:#3b82f6,stroke-width:1px,color:#60a5fa
@@ -303,10 +301,10 @@ Birden fazla agent eş zamanlı çalışırken, her birinin git conflict'lerini 
 
 ```mermaid
 graph TD
-    MAIN["🏠 Main Session<br/>.git"] --> WT1["📁 Worktree 1<br/>subagent-1"]
-    MAIN --> WT2["📁 Worktree 2<br/>subagent-2"]
-    MAIN --> WT3["📁 Worktree 3<br/>subagent-3"]
-    WT1 --> MERGE["🔀 Auto Merge<br/>& Cleanup"]
+    MAIN["Main Session<br/>.git"] --> WT1["Worktree 1<br/>subagent-1"]
+    MAIN --> WT2["Worktree 2<br/>subagent-2"]
+    MAIN --> WT3["Worktree 3<br/>subagent-3"]
+    WT1 --> MERGE["Auto Merge<br/>& Cleanup"]
     WT2 --> MERGE
     WT3 --> MERGE
 
@@ -477,5 +475,187 @@ Subagent'lar varsayılan 30 dakika timeout'a sahiptir. Ayarlanabilir:
 }
 ```
 
+***
 
+## Örnek 1: Legacy Monolith → Microservices Migrasyon
+
+> Gerçek dünya senaryosu: 5 yıllık bir Node.js monolith'i microservices mimarisine taşıyoruz. 6 subagent paralel çalışıyor, her biri önceki agent'ın çıktısını kullanıyor ve shared contract dosyaları üzerinden birbirleriyle iletişim kuruyor.
+
+### Senaryo
+
+E-ticaret monolith'i (tek Express.js uygulaması) → 4 bağımsız microservice:
+
+* **User Service** — auth, profil, session
+* **Product Service** — katalog, stok, arama
+* **Order Service** — sipariş, ödeme, kargo
+* **Notification Service** — email, SMS, push
+
+### Akış Diyagramı
+
+```mermaid
+graph TD
+    START["Monolith →<br/>Microservices"] --> PHASE1
+
+    subgraph PHASE1["Faz 1: Analiz"]
+        ARCH["Architect<br/>Opus 1M"]
+        DB["DB Migration<br/>Opus 1M"]
+    end
+
+    ARCH -- "servis sınırları<br/>API contract'lar" --> PHASE2
+    DB -- "migration planı" --> PHASE2
+
+    subgraph PHASE2["Faz 2: Paralel Gelistirme"]
+        USER["User Service<br/>Sonnet"]
+        PRODUCT["Product Service<br/>Sonnet"]
+        ORDER["Order Service<br/>Sonnet"]
+        NOTIF["Notification<br/>Sonnet"]
+    end
+
+    PHASE2 -- "servisler hazır" --> PHASE3
+
+    subgraph PHASE3["Faz 3: Entegrasyon"]
+        GW["API Gateway<br/>Sonnet"]
+        TEST["Integration Test<br/>Opus"]
+    end
+
+    GW -- "routing hazır" --> TEST
+
+    style PHASE1 fill:#1a1a3e,stroke:#a855f7,stroke-width:2px,color:#c084fc
+    style PHASE2 fill:#0f2027,stroke:#3b82f6,stroke-width:2px,color:#60a5fa
+    style PHASE3 fill:#132213,stroke:#22c55e,stroke-width:2px,color:#4ade80
+```
+
+### Agent İletişim Mekanizması
+
+Agent'lar birbirleriyle doğrudan konuşamaz, ama **shared dosyalar** üzerinden iletişim kurar. Her agent bir sonrakinin ihtiyaç duyduğu çıktıyı belirli bir dosyaya yazar:
+
+```
+shared/
+├── contracts/
+│   ├── user-service.openapi.yaml      ← Architect yazar, tüm agent'lar okur
+│   ├── product-service.openapi.yaml
+│   ├── order-service.openapi.yaml
+│   └── notification-events.json       ← Event schema'ları
+├── db-plan.md                         ← DB Agent yazar
+├── architecture-decision-record.md    ← Architect yazar
+└── integration-checklist.md           ← Her agent tamamladığını işaretler
+```
+
+```mermaid
+graph LR
+    ARCH["Architect"] -- "OpenAPI spec yaz" --> CONTRACTS["shared/<br/>contracts/"]
+    CONTRACTS -- "spec oku" --> USER["User"]
+    CONTRACTS -- "spec oku" --> PRODUCT["Product"]
+    CONTRACTS -- "spec oku" --> ORDER["Order"]
+    CONTRACTS -- "event schema oku" --> NOTIF["Notification"]
+
+    USER -- "guncelle" --> CHECK["integration<br/>checklist.md"]
+    PRODUCT -- "guncelle" --> CHECK
+    ORDER -- "guncelle" --> CHECK
+    NOTIF -- "guncelle" --> CHECK
+    CHECK -- "tumu tamam?" --> GW["Gateway"]
+
+    style CONTRACTS fill:#1c1208,stroke:#eab308,stroke-width:2px,color:#facc15
+    style CHECK fill:#132213,stroke:#22c55e,stroke-width:2px,color:#4ade80
+```
+
+### Başlatma Prompt'u
+
+```
+Legacy e-ticaret monolith'imizi microservices'a taşıyoruz. Aşağıdaki fazları
+multi-agent olarak fully autonomous gerçekleştir. Agent'lar shared/ klasörü
+üzerinden birbirleriyle iletişim kursun.
+
+## Faz 1 — Analiz (paralel)
+
+ARCHITECT AGENT (Opus 1M):
+- Monolith codebase'ini tara (src/ altındaki tüm dosyalar)
+- Domain boundary'leri belirle (User, Product, Order, Notification)
+- Her servis için OpenAPI 3.0 spec yaz → shared/contracts/<service>.openapi.yaml
+- Servisler arası event schema'larını tanımla → shared/contracts/notification-events.json
+- Mimari kararları belgele → shared/architecture-decision-record.md
+- shared/integration-checklist.md oluştur (her servis için checkbox)
+
+DB MIGRATION AGENT (Opus 1M):
+- Mevcut monolith DB schema'sını analiz et
+- Her microservice için ayrı DB schema tasarla
+- Data migration stratejisi yaz → shared/db-plan.md
+- Migration script'lerinin iskeletlerini oluştur
+
+## Faz 2 — Paralel Geliştirme (4 agent eş zamanlı)
+
+Her service agent kendi worktree'sinde çalışsın (isolation: worktree).
+Her agent shared/contracts/ altındaki kendi OpenAPI spec'ini okuyarak başlasın.
+
+USER SERVICE AGENT (Sonnet):
+- shared/contracts/user-service.openapi.yaml'ı oku
+- services/user/ altında Express.js + TypeScript microservice oluştur
+- Auth (JWT), profil CRUD, session yönetimi implement et
+- DB migration'ları shared/db-plan.md'ye göre uygula
+- Unit test yaz, integration-checklist.md'de kendi satırını işaretle
+
+PRODUCT SERVICE AGENT (Sonnet):
+- shared/contracts/product-service.openapi.yaml'ı oku
+- services/product/ altında microservice oluştur
+- Katalog CRUD, stok yönetimi, arama implement et
+- Unit test yaz, checklist güncelle
+
+ORDER SERVICE AGENT (Sonnet):
+- shared/contracts/order-service.openapi.yaml'ı oku
+- services/order/ altında microservice oluştur
+- Sipariş akışı, ödeme entegrasyonu (Stripe), kargo takibi implement et
+- User ve Product service'lere HTTP client yaz (spec'ten)
+- Unit test yaz, checklist güncelle
+
+NOTIFICATION SERVICE AGENT (Sonnet):
+- shared/contracts/notification-events.json'ı oku
+- services/notification/ altında event-driven microservice oluştur
+- Email (SendGrid), SMS (Twilio), push notification handler'ları implement et
+- Event consumer (RabbitMQ/Redis Streams) kur
+- Unit test yaz, checklist güncelle
+
+## Faz 3 — Entegrasyon (sıralı)
+
+API GATEWAY AGENT (Sonnet):
+- Tüm OpenAPI spec'leri oku
+- gateway/ altında API Gateway oluştur
+- Rate limiting, auth middleware, request routing implement et
+- Docker Compose ile tüm servisleri ayağa kaldır
+- integration-checklist.md'nin tamamlandığını doğrula
+
+INTEGRATION TEST AGENT (Opus):
+- Tüm servisleri Docker Compose ile başlat
+- E2E test senaryoları yaz:
+  • Kullanıcı kaydı → login → ürün listele → sipariş ver → bildirim al
+  • Stok kontrolü → yetersiz stok → hata yönetimi
+  • Ödeme başarısız → rollback → bildirim
+- Servisler arası contract test'leri çalıştır
+- Performans baseline ölç (response time, throughput)
+- Sonuç raporu yaz
+```
+
+### Agent Konfigürasyonu
+
+| Agent            | Model   | Worktree | Tool                    | Okuduğu Shared Dosya         |
+| ---------------- | ------- | -------- | ----------------------- | ---------------------------- |
+| Architect        | Opus 1M | —        | Read, Glob, Grep, Write | Monolith src/                |
+| DB Migration     | Opus 1M | —        | Read, Grep, Write, Bash | Monolith DB schema           |
+| User Service     | Sonnet  | ✅        | Read, Edit, Write, Bash | user-service.openapi.yaml    |
+| Product Service  | Sonnet  | ✅        | Read, Edit, Write, Bash | product-service.openapi.yaml |
+| Order Service    | Sonnet  | ✅        | Read, Edit, Write, Bash | order + user/product spec    |
+| Notification     | Sonnet  | ✅        | Read, Edit, Write, Bash | notification-events.json     |
+| API Gateway      | Sonnet  | —        | Read, Edit, Write, Bash | Tüm OpenAPI spec'ler         |
+| Integration Test | Opus    | —        | Read, Write, Bash       | Tüm servisler, checklist     |
+
+### Neden Bu Mimari Çalışıyor
+
+* **Shared contracts = agent'lar arası iletişim**: OpenAPI spec ve event schema'ları tüm agent'lar için tek kaynak gerçeğidir. Bir agent diğerinin API'sini spec'ten okuyarak client yazar — runtime'da değil, build time'da uyumluluk sağlanır.
+
+* **integration-checklist.md = senkronizasyon noktası**: Her service agent tamamladığında checklist'i günceller. Gateway agent ancak tüm satırlar işaretlendiğinde başlar.
+
+* **Worktree izolasyonu = race condition yok**: Her service agent kendi git worktree'sinde çalışır, aynı dosyayı değiştirme riski sıfır.
+
+* **Faz 1 Opus, Faz 2 Sonnet = maliyet optimizasyonu**: Mimari kararlar (yüksek muhakeme) için Opus, implementation (yüksek hız) için Sonnet. Tahmini maliyet \~\$15-25, manuel geliştirme süresinin 1/10'u.
+
+* **Contract-first development**: Architect agent önce spec yazar, service agent'lar spec'e uygun implement eder, integration test agent contract uyumluluğunu doğrular. Geleneksel "API-first" yaklaşımının AI-native versiyonu.
 
