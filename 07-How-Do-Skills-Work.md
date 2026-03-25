@@ -220,17 +220,19 @@ claude skill test react-patterns     # Skill aktivasyonu ve kalitesini test et
 ## When to Create a Skill
 
 **Skill oluştur:**
-- Alan uzmanlığı otomatik aktifleşmeli
-- Birden fazla takım üyesi aynı bilgiye ihtiyaç duyuyor
-- Aynı pattern'ları veya kuralları tekrar tekrar açıklıyorsun
-- Context, açık çağrı olmadan enjekte edilmeli
-- Bilgi birden fazla dosyayı kapsıyor ve organizasyon gerekiyor
+
+* Alan uzmanlığı otomatik aktifleşmeli
+* Birden fazla takım üyesi aynı bilgiye ihtiyaç duyuyor
+* Aynı pattern'ları veya kuralları tekrar tekrar açıklıyorsun
+* Context, açık çağrı olmadan enjekte edilmeli
+* Bilgi birden fazla dosyayı kapsıyor ve organizasyon gerekiyor
 
 **Skill oluşturma:**
-- Çağrı zamanlamasını kontrol etmek istiyorsan (slash command kullan)
-- Görev ayrı context gerektiriyorsa (subagent kullan)
-- Tek seferlik bir prompt'sa (direkt yaz)
-- "Skill" aslında tek bir template'se (slash command kullan)
+
+* Çağrı zamanlamasını kontrol etmek istiyorsan (slash command kullan)
+* Görev ayrı context gerektiriyorsa (subagent kullan)
+* Tek seferlik bir prompt'sa (direkt yaz)
+* "Skill" aslında tek bir template'se (slash command kullan)
 
 > **Expert tip:** Kendinizi auth kodu üzerinde çalışırken her seferinde `/security-review` yazarken buluyorsanız, bunu skill'e dönüştürün. Uzmanlığı ambient yapın, açıkça çağrılır değil. Açık çağrı istiyorsanız command olarak tutun.
 
