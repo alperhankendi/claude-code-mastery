@@ -14,13 +14,13 @@ Sıradan ve etkili Claude Code kullanımı arasındaki fark beş temel sisteme d
 
 > Bu rehberde kişisel tercihlerimi, günlük kullanımda verim aldığım yaklaşımları ve deneyimlerimi paylaşıyorum. Claude Code hakkında İngilizce kaynak bolca mevcut; ancak kişisel deneyimin dokümantasyondan çok daha değerli olduğuna inanıyorum. Bu yüzden bu seriyi hazırlamaya karar verdim.
 
-* Beş sistem etkinliğinizi belirler: configuration hierarchy, permissions, hooks, MCP ve subagents — davranıştan otomasyona her şeyi kontrol eder.
+* Beş sistem etkinliğinizi belirler: configuration hierarchy, permissions, hooks, MCP ve subagents - davranıştan otomasyona her şeyi kontrol eder.
 
 * İşleri Delegation Layer'a itin: subagent'lar temiz context window'larda çalışarak context bloat'u önler, sadece özetleri döndürür.
 
 * Hook'lar çalışmayı garanti eder; prompt'lar garanti etmez: linting, formatting ve güvenlik kontrolleri gibi her seferinde çalışması gereken işler için hook kullanın.
 
-* Model katmanlama maliyeti düşürür: subagent keşiflerini ucuz modellere yönlendirin, Opus'u mimari kararlar için saklayın — ya da kalite tek değişkeninizse Opus'ta standartlaşın.
+* Model katmanlama maliyeti düşürür: subagent keşiflerini ucuz modellere yönlendirin, Opus'u mimari kararlar için saklayın - ya da kalite tek değişkeninizse Opus'ta standartlaşın.
 
 * MCP, Claude'u araç zincirinize bağlar: veritabanları, GitHub, Sentry ve 3.000+ entegrasyon, Claude'u dosya okuma ve bash komutlarının ötesine taşır.
 
@@ -147,7 +147,7 @@ graph TD
     style EXT fill:#1a1a3e,stroke:#a855f7,stroke-width:1px,color:#c084fc
 ```
 
-> **Kaynak:** [DeepWiki — Claude Code System Architecture](https://deepwiki.com/anthropics/claude-code/1.1-system-architecture)
+> **Kaynak:** [DeepWiki - Claude Code System Architecture](https://deepwiki.com/anthropics/claude-code/1.1-system-architecture)
 
 ### Entry Point and CLI Layer
 
@@ -157,9 +157,9 @@ Birincil giriş noktası `claude` komutudur. Argument parsing, environment varia
 
 Session'lar konuşma geçmişini ve metadata'yı saklar. Her session `~/.claude/sessions/<session-id>/` altında tutulur.
 
-- **Transcript Persistence**: Geçmiş `transcript.jsonl` dosyasına kaydedilir. Büyük session'lar (>5 MB) geliştirilmiş bellek verimliliğiyle yönetilir.
-- **Resumption**: `/resume` komutu session'lar arasında geçiş sağlar; mevcut session için `SessionEnd` hook'u, yeni session için `SessionStart` hook'u tetiklenir.
-- **Remote Control**: `/remote-control` komutu, yerel session'ları `claude.ai/code` üzerinden tarayıcı veya telefon erişimine köprüler.
+* **Transcript Persistence**: Geçmiş `transcript.jsonl` dosyasına kaydedilir. Büyük session'lar (>5 MB) geliştirilmiş bellek verimliliğiyle yönetilir.
+* **Resumption**: `/resume` komutu session'lar arasında geçiş sağlar; mevcut session için `SessionEnd` hook'u, yeni session için `SessionStart` hook'u tetiklenir.
+* **Remote Control**: `/remote-control` komutu, yerel session'ları `claude.ai/code` üzerinden tarayıcı veya telefon erişimine köprüler.
 
 ### Agent Orchestration
 
@@ -169,9 +169,9 @@ Claude Code, bir "Main Agent"ın özelleşmiş işleri "Subagent"lara devredebil
 
 Task tool, modelin belirli hedefler için subagent başlatmasını sağlar.
 
-- **Worktree Isolation**: Subagent'lar, ana çalışma dizinini kirletmemek için geçici git worktree'lerde başlatılabilir.
-- **Backgrounding**: Uzun süren görevler arka plana alınabilir; kullanıcı ana agent ile etkileşime devam eder.
-- **Parallelism**: Multi-agent team'ler (ör. code-review plugin) farklı modellerle (Sonnet/Opus) paralel reviewer çalıştırır ve son bir doğrulama adımı uygular.
+* **Worktree Isolation**: Subagent'lar, ana çalışma dizinini kirletmemek için geçici git worktree'lerde başlatılabilir.
+* **Backgrounding**: Uzun süren görevler arka plana alınabilir; kullanıcı ana agent ile etkileşime devam eder.
+* **Parallelism**: Multi-agent team'ler (ör. code-review plugin) farklı modellerle (Sonnet/Opus) paralel reviewer çalıştırır ve son bir doğrulama adımı uygular.
 
 ### Tool System & Permissions
 
@@ -209,19 +209,19 @@ graph LR
     style TOOLS fill:#0f2027,stroke:#3b82f6,stroke-width:1px,color:#60a5fa
 ```
 
-> **Kaynak:** [DeepWiki — Tool Execution Flow](https://deepwiki.com/anthropics/claude-code/1.1-system-architecture#tool-execution-flow)
+> **Kaynak:** [DeepWiki - Tool Execution Flow](https://deepwiki.com/anthropics/claude-code/1.1-system-architecture#tool-execution-flow)
 
-- **BashTool**: Shell komutları çalıştırır. Sandbox Mode (`init-firewall.sh`) ile ağ erişimini belirli domain'lerle sınırlandırır.
-- **FileWriteTool**: Dosya oluşturma/üzerine yazma işlemlerini yönetir. Hedef ortama göre satır sonlarını (CRLF/LF) koruma mantığı içerir.
-- **Permission Rules**: `settings.json`'da yapılandırılır; kurallar belirli tool pattern'larını `allow`, `ask` veya `deny` edebilir. Bileşik bash komutları (ör. `cd src && npm test`) alt komut bazında ayrıştırılıp doğrulanır.
+* **BashTool**: Shell komutları çalıştırır. Sandbox Mode (`init-firewall.sh`) ile ağ erişimini belirli domain'lerle sınırlandırır.
+* **FileWriteTool**: Dosya oluşturma/üzerine yazma işlemlerini yönetir. Hedef ortama göre satır sonlarını (CRLF/LF) koruma mantığı içerir.
+* **Permission Rules**: `settings.json`'da yapılandırılır; kurallar belirli tool pattern'larını `allow`, `ask` veya `deny` edebilir. Bileşik bash komutları (ör. `cd src && npm test`) alt komut bazında ayrıştırılıp doğrulanır.
 
 ### Context Window & Compaction
 
 Modellerin sınırlı context window'unu yönetmek için Claude Code otomatik compaction uygular.
 
-- **Compaction Trigger**: Geçmiş sınıra yaklaştığında, sistem önceki turları "compact summary" olarak özetleyerek yer açar.
-- **Token Limits**: Yeni modeller için varsayılan output limitleri artırılmıştır (ör. Opus 4.6 için 64K).
-- **Prompt Caching**: System prompt'lar ve tool şemaları, gecikme ve maliyeti azaltmak için cache'lenir.
+* **Compaction Trigger**: Geçmiş sınıra yaklaştığında, sistem önceki turları "compact summary" olarak özetleyerek yer açar.
+* **Token Limits**: Yeni modeller için varsayılan output limitleri artırılmıştır (ör. Opus 4.6 için 64K).
+* **Prompt Caching**: System prompt'lar ve tool şemaları, gecikme ve maliyeti azaltmak için cache'lenir.
 
 ### Extension Mechanisms
 
@@ -229,29 +229,29 @@ Modellerin sınırlı context window'unu yönetmek için Claude Code otomatik co
 
 Plugin'ler, `plugin.json` manifest'i ile tanımlanan birincil genişletme noktasıdır. Sağlayabilecekleri:
 
-- **Skills**: `SKILL.md` dosyalarında tanımlanan özel slash command'lar (ör. `/frontend-design`)
-- **Hooks**: Belirli lifecycle event'lerinde çalışan mantık (ör. `PreToolUse`, `StopFailure`)
-- **Persistent State**: Plugin'ler `${CLAUDE_PLUGIN_DATA}` içinde güncelleme sonrası da korunan veri saklayabilir.
+* **Skills**: `SKILL.md` dosyalarında tanımlanan özel slash command'lar (ör. `/frontend-design`)
+* **Hooks**: Belirli lifecycle event'lerinde çalışan mantık (ör. `PreToolUse`, `StopFailure`)
+* **Persistent State**: Plugin'ler `${CLAUDE_PLUGIN_DATA}` içinde güncelleme sonrası da korunan veri saklayabilir.
 
 **Hook System**
 
 Hook'lar, dış script'lerin veya plugin'lerin agent aksiyonlarını yakalamasını sağlar:
 
-- **PreToolUse**: Tool argümanlarını değiştirebilir veya çalışmayı engelleyebilir.
-- **StopFailure**: Bir tur API hatası (rate limit, auth failure) nedeniyle sonlandığında tetiklenir; otomatik kurtarma veya loglama için kullanılır.
+* **PreToolUse**: Tool argümanlarını değiştirebilir veya çalışmayı engelleyebilir.
+* **StopFailure**: Bir tur API hatası (rate limit, auth failure) nedeniyle sonlandığında tetiklenir; otomatik kurtarma veya loglama için kullanılır.
 
 **MCP (Model Context Protocol)**
 
 Claude Code, harici tool'ları keşfetmek ve kullanmak için MCP server'larla entegre olur.
 
-- **Discovery**: MCP server'lar `claude mcp add` ile eklenebilir.
-- **Lazy Loading**: Bir MCP server çok sayıda tool'a sahipse, Claude Code context window'u doldurmamak için `MCPSearch` pattern'ı kullanır.
+* **Discovery**: MCP server'lar `claude mcp add` ile eklenebilir.
+* **Lazy Loading**: Bir MCP server çok sayıda tool'a sahipse, Claude Code context window'u doldurmamak için `MCPSearch` pattern'ı kullanır.
 
----
+***
 
 # Configuration System
 
-Ayarlar katmanlıdır — üst seviyeler alt seviyeleri geçersiz kılar. Enterprise ayarları kilitlidir.
+Ayarlar katmanlıdır - üst seviyeler alt seviyeleri geçersiz kılar. Enterprise ayarları kilitlidir.
 
 ```mermaid
 graph TD
@@ -311,7 +311,7 @@ graph TD
 | **Tool**  | `MCP_TIMEOUT`                | MCP server başlatma timeout    |
 | **Debug** | `ANTHROPIC_LOG=debug`        | API request loglama            |
 
-> Tüm env variable listesi için: [Anthropic Docs — Environment Variables](https://docs.anthropic.com/en/docs/claude-code/settings)
+> Tüm env variable listesi için: [Anthropic Docs - Environment Variables](https://docs.anthropic.com/en/docs/claude-code/settings)
 
 > Model seçimi, extended context ve fast mode detayları için bkz. [02-Which-Model-Should-I-Choose.md](02-Which-Model-Should-I-Choose.md)
 

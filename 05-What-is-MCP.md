@@ -62,7 +62,7 @@ claude mcp add --transport stdio postgres \
 
 ## Scope Management
 
-Üç kapsam seviyesi — local, project ve user. Local diğerlerini geçersiz kılar:
+Üç kapsam seviyesi - local, project ve user. Local diğerlerini geçersiz kılar:
 
 | Scope   | Depolama                      | Görünürlük                | Kullanım                  |
 | ------- | ----------------------------- | ------------------------- | ------------------------- |
@@ -75,7 +75,7 @@ claude mcp add --scope project --transport http github https://...
 claude mcp add --scope user --transport stdio personal-tool -- ./my-tool
 ```
 
-## Configuration — .mcp.json
+## Configuration - .mcp.json
 
 Proje seviyesi server'ları `.mcp.json` dosyasında tanımlayın:
 
@@ -115,7 +115,7 @@ Server'lar 50+ tool sunduğunda, tool açıklamaları aşırı context tüketir.
 | --------------------- | ------ | ------- |
 | Opus 4 doğruluk       | %49    | %74     |
 | Opus 4.5 doğruluk     | %79.5  | %88.1   |
-| Token overhead azalma | —      | %85     |
+| Token overhead azalma | -      | %85     |
 
 Yapılandırma:
 
@@ -131,8 +131,8 @@ Seçenekler: `true` (her zaman), `false` (tümünü önceden yükle), `auto:N` (
 
 MCP server'lar görev sırasında interaktif dialoglar ile yapılandırılmış input isteyebilir. İki hook event destekler:
 
-* **Elicitation** — dialog görünmeden önce
-* **ElicitationResult** — kullanıcı yanıtladıktan sonra
+* **Elicitation** - dialog görünmeden önce
+* **ElicitationResult** - kullanıcı yanıtladıktan sonra
 
 Enterprise workflow'larda MCP server prompt'larının politikaya göre önceden doldurulması veya kısıtlanması için kullanılır.
 
@@ -256,7 +256,7 @@ Deny listesi mutlak önceliğe sahiptir ve komutlar argüman sırası dahil tam 
 
 ## claude.ai MCP Connectors (v2.1.46+)
 
-Claude Code, claude.ai hesabınızda yapılandırılmış MCP connector'larını kullanabilir — web ve CLI arasında köprü kurar. Devre dışı bırakmak için:
+Claude Code, claude.ai hesabınızda yapılandırılmış MCP connector'larını kullanabilir - web ve CLI arasında köprü kurar. Devre dışı bırakmak için:
 
 ```Shell
 ENABLE_CLAUDEAI_MCP_SERVERS=false
@@ -264,7 +264,7 @@ ENABLE_CLAUDEAI_MCP_SERVERS=false
 
 ## MCP Apps (Ocak 2026)
 
-Anthropic, MCP Apps'i başlattı — MCP server'lar artık Claude içinde render edilen interaktif arayüzler sunabiliyor. Asana, Figma, Slack gibi servisler için arayüzden çıkmadan içerik görüntüleme ve düzenleme mümkün.
+Anthropic, MCP Apps'i başlattı - MCP server'lar artık Claude içinde render edilen interaktif arayüzler sunabiliyor. Asana, Figma, Slack gibi servisler için arayüzden çıkmadan içerik görüntüleme ve düzenleme mümkün.
 
 ***
 
@@ -299,7 +299,7 @@ graph LR
 **Örnek session:**
 
 ```
-> Login sayfası tasarla — email, password, "Giriş Yap" butonu, "Şifremi Unuttum" linki
+> Login sayfası tasarla - email, password, "Giriş Yap" butonu, "Şifremi Unuttum" linki
 > Screenshot al, kontrol edeyim
 > Butonu daha belirgin yap, rengi mavi olsun
 > Bu tasarımı React component'ine çevir
@@ -315,9 +315,9 @@ graph LR
 | `get_style_guide`  | Stil rehberi al, tutarlı tasarım yap   |
 | `snapshot_layout`  | Layout yapısını incele                 |
 
-> **Kaynak:** [Pencil.dev + Claude Code Workflow](https://atalupadhyay.wordpress.com/2026/02/25/pencil-dev-claude-code-workflow-from-design-to-production-code-in-minutes/) · [DevelopersIO — Pencil MCP](https://dev.classmethod.jp/en/articles/claude-code-pencil-mcp-web-design/)
+> **Kaynak:** [Pencil.dev + Claude Code Workflow](https://atalupadhyay.wordpress.com/2026/02/25/pencil-dev-claude-code-workflow-from-design-to-production-code-in-minutes/) · [DevelopersIO - Pencil MCP](https://dev.classmethod.jp/en/articles/claude-code-pencil-mcp-web-design/)
 
-### Multi-Agent Dashboard Geliştirme — Fully Autonomous Workflow
+### Multi-Agent Dashboard Geliştirme - Fully Autonomous Workflow
 
 > Kişisel pratiğim: Veritabanından dashboard'a kadar tüm geliştirme sürecini multi-agent orchestration ile fully autonomous şekilde gerçekleştiriyorum. Her subagent kendi alanında uzmanlaşır, çıktısını bir sonrakine aktarır.
 
@@ -401,7 +401,7 @@ Her subagent çıktısını bir sonrakine aktarsın. Kararları paylaşarak iler
 
 **Neden bu akış çalışıyor:**
 
-* **Sıralı bağımlılık**: Her subagent, öncekinin çıktısını input olarak alır — bilgi kaybı yok
+* **Sıralı bağımlılık**: Her subagent, öncekinin çıktısını input olarak alır - bilgi kaybı yok
 * **İzole context**: Her subagent kendi alanına odaklanır, context bloat olmaz
 * **Doğrulama noktaları**: Her aşamada screenshot, test veya spec ile doğrulama yapılır
 * **Opus planlama, Sonnet uygulama**: Data analysis ve UX design karmaşık muhakeme gerektirir (Opus), implementation Sonnet ile hızlı ve verimli
@@ -412,7 +412,7 @@ Her subagent çıktısını bir sonrakine aktarsın. Kararları paylaşarak iler
 
 ## Pratik Kullanım: Chrome DevTools MCP ile Remote Debug
 
-> Kişisel pratiğim: Chrome DevTools MCP ile Claude Code'a canlı tarayıcıyı kontrol ettiriyorum — console log'ları, network request'leri, screenshot ve performance analizi doğrudan agent context'ine akıyor.
+> Kişisel pratiğim: Chrome DevTools MCP ile Claude Code'a canlı tarayıcıyı kontrol ettiriyorum, console log'ları, network request'leri, screenshot ve performance analizi doğrudan agent context'ine akıyor.
 
 [Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp), Claude Code'a Chrome DevTools Protocol üzerinden canlı bir Chrome tarayıcıya tam erişim sağlar.
 
@@ -435,7 +435,7 @@ claude mcp add --transport stdio chrome-devtools \
   -- npx -y chrome-devtools-mcp --browserUrl http://localhost:9222
 ```
 
-> `--user-data-dir` Chrome 136+ için zorunlu — login session'ları, cookie'ler ve profil verileri bu dizinde saklanır, yeniden başlatmalarda korunur.
+> `--user-data-dir` Chrome 136+ için zorunlu - login session'ları, cookie'ler ve profil verileri bu dizinde saklanır, yeniden başlatmalarda korunur.
 
 **Workflow:**
 
@@ -457,15 +457,15 @@ graph LR
 
 ```
 > localhost:3000'i aç ve screenshot al
-> Login formunu doldur — email: test@test.com, password: 123456
+> Login formunu doldur - email: test@test.com, password: 123456
 > Console'da hata var mı kontrol et
 > Network tab'da hangi API çağrıları yapılıyor listele
 > Sayfanın Core Web Vitals skorunu ölç
 ```
 
-**Authenticated session'lar için:** `--user-data-dir` ile bir kez login olun, session cookie'leri browser restart'larında bile korunur — her seferinde tekrar login gerekmez.
+**Authenticated session'lar için:** `--user-data-dir` ile bir kez login olun, session cookie'leri browser restart'larında bile korunur - her seferinde tekrar login gerekmez.
 
-> **Kaynak:** [Chrome DevTools MCP — GitHub](https://github.com/ChromeDevTools/chrome-devtools-mcp) · [Authenticated Websites Guide](https://raf.dev/blog/chrome-debugging-profile-mcp/) · [Resmi Docs](https://code.claude.com/docs/en/chrome)
+> **Kaynak:** [Chrome DevTools MCP - GitHub](https://github.com/ChromeDevTools/chrome-devtools-mcp) · [Authenticated Websites Guide](https://raf.dev/blog/chrome-debugging-profile-mcp/) · [Resmi Docs](https://code.claude.com/docs/en/chrome)
 
 ***
 

@@ -17,16 +17,16 @@ Her görev için doğru modeli seçmek hem maliyeti hem kaliteyi önemli ölçü
 
 **Sonnet 4.6 (17 Şubat 2026):** Sonnet 4.5'in yerini alan yeni dengeli model. Daha iyi agentic search performansı, daha az token tüketimi. Extended thinking, adaptive thinking ve 1M context window (beta) destekler. 64K max output. Model ID: `claude-sonnet-4-6`.
 
-**Fiyat farkı neden önemli:** Tipik bir kodlama session'ı 50K-200K input ve 10K-50K output token tüketir. Haiku ile session başına $0.10-$0.45, Opus ile aynı session $0.50-$2.25 — 5 kat fark. Opus'u gerçekten zor problemler için saklayın.
+**Fiyat farkı neden önemli:** Tipik bir kodlama session'ı 50K-200K input ve 10K-50K output token tüketir. Haiku ile session başına $0.10-$0.45, Opus ile aynı session $0.50-$2.25 - 5 kat fark. Opus'u gerçekten zor problemler için saklayın.
 
 ## When to Use Each Model
 
 ```mermaid
 graph LR
     subgraph COST["Maliyet → Düşük ────────────────── Yüksek"]
-        H["🟢 Haiku<br/>Keşif, arama, hızlı sorular"]
-        S["🟡 Sonnet<br/>Günlük kodlama, bug fix, test"]
-        O["🔴 Opus<br/>Mimari, zor debug, güvenlik"]
+        H["Haiku<br/>Keşif, arama, hızlı sorular"]
+        S["Sonnet<br/>Günlük kodlama, bug fix, test"]
+        O["Opus<br/>Mimari, zor debug, güvenlik"]
     end
 
     H --> S --> O
@@ -103,7 +103,7 @@ Fast mode **aynı modelden** önemli ölçüde daha hızlı çıktı sağlar; da
 | Input  | \$5/MTok  | \$30/MTok (6x)  |
 | Output | \$25/MTok | \$150/MTok (6x) |
 
-Fast mode fiyatlandırması tüm context window boyunca geçerlidir — long context ek ücreti yoktur. Prompt caching ve data residency çarpanlarıyla birleşir ama long context fiyatlandırmasıyla birleşmez. Batch API ile kullanılamaz.
+Fast mode fiyatlandırması tüm context window boyunca geçerlidir - long context ek ücreti yoktur. Prompt caching ve data residency çarpanlarıyla birleşir ama long context fiyatlandırmasıyla birleşmez. Batch API ile kullanılamaz.
 
 **Ne zaman kullanmalı:**
 
@@ -145,28 +145,30 @@ Fast mode fiyatlandırması tüm context window boyunca geçerlidir — long con
   <img src="img/claude-code-usage.png" alt="Claude Code Usage Tracking" width="100%" />
 </p>
 
-## Langfuse — Agentic App Observability
+## Langfuse - Agentic App Observability
 
 [Langfuse](https://langfuse.com/), agentic uygulamaların model kullanımını, maliyetini ve davranışını trace eden open-source bir LLM observability platformudur.
 
 **Ne işe yarar:**
-- Her LLM çağrısını, tool kullanımını, retrieval işlemini ve embedding'i detaylı trace'ler halinde loglar
-- Token tüketimi ve maliyeti gerçek zamanlı izler
-- Multi-turn konuşmaları session bazında analiz eder
-- Latency darboğazlarını tespit eder
+
+* Her LLM çağrısını, tool kullanımını, retrieval işlemini ve embedding'i detaylı trace'ler halinde loglar
+* Token tüketimi ve maliyeti gerçek zamanlı izler
+* Multi-turn konuşmaları session bazında analiz eder
+* Latency darboğazlarını tespit eder
 
 **Ne sunar:**
 
-| Özellik | Açıklama |
-|---------|----------|
-| **Tracing** | LLM call, tool use, retrieval ve embedding'lerin uçtan uca trace kaydı |
-| **Cost Tracking** | Model bazında token tüketimi ve maliyet analizi |
-| **Prompt Management** | Prompt'ları merkezi olarak versiyonla, A/B test yap, cache'le |
-| **Evaluations** | LLM-as-a-judge, kullanıcı feedback, manuel labeling, custom eval pipeline'ları |
-| **Integrations** | OpenAI, LangChain, LlamaIndex, OpenTelemetry ve 50+ framework desteği |
+| Özellik               | Açıklama                                                                       |
+| --------------------- | ------------------------------------------------------------------------------ |
+| **Tracing**           | LLM call, tool use, retrieval ve embedding'lerin uçtan uca trace kaydı         |
+| **Cost Tracking**     | Model bazında token tüketimi ve maliyet analizi                                |
+| **Prompt Management** | Prompt'ları merkezi olarak versiyonla, A/B test yap, cache'le                  |
+| **Evaluations**       | LLM-as-a-judge, kullanıcı feedback, manuel labeling, custom eval pipeline'ları |
+| **Integrations**      | OpenAI, LangChain, LlamaIndex, OpenTelemetry ve 50+ framework desteği          |
 
 **Neden önemli:** Claude Code ile agentic uygulama geliştirdiğinizde, production'da hangi agent'ın hangi tool'u ne kadar token harcayarak çağırdığını, nerede hata yaptığını ve maliyetin nereye gittiğini görmek kritiktir. Langfuse tam olarak bu görünürlüğü sağlar.
 
 > Open-source (MIT lisansı), self-host edilebilir. 19.000+ GitHub star. Python ve JavaScript SDK'ları mevcut.
 >
 > **Kaynak:** [langfuse.com](https://langfuse.com/) · [GitHub](https://github.com/langfuse/langfuse) · [Video](https://www.youtube.com/watch?v=pTneXS_m1rk)
+

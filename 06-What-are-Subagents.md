@@ -1,6 +1,6 @@
 # What are Subagents?
 
-Subagent'lar, ana session tarafından özelleşmiş görevleri yönetmek için başlatılan izole Claude instance'larıdır. Her subagent temiz bir context ile başlar, bağımsız çalışır ve yalnızca bir özet döndürür — ana konuşmada "context bloat"u önler.
+Subagent'lar, ana session tarafından özelleşmiş görevleri yönetmek için başlatılan izole Claude instance'larıdır. Her subagent temiz bir context ile başlar, bağımsız çalışır ve yalnızca bir özet döndürür - ana konuşmada "context bloat"u önler.
 
 **Temel sorun:** Tek bir konuşma penceresi dosya okumaları, tool çıktıları ve önceki kararlarla dolar. Context büyüdükçe Claude orijinal hedefleri kaybeder ve kalite düşer. Subagent'lar odaklanmış işleri temiz başlayan ayrı context'lere aktararak bunu çözer.
 
@@ -63,7 +63,7 @@ graph TD
     style PLUGINS fill:#1a1a3e,stroke:#a855f7,stroke-width:1px,color:#c084fc
 ```
 
-> **Kaynak:** [DeepWiki — Agent System and Subagents](https://deepwiki.com/anthropics/claude-code/3.1-agent-system-and-subagents)
+> **Kaynak:** [DeepWiki - Agent System and Subagents](https://deepwiki.com/anthropics/claude-code/3.1-agent-system-and-subagents)
 
 ## Creating Subagents with Task Tool
 
@@ -103,7 +103,7 @@ graph LR
 **İletişim mekanizmaları:**
 
 * **TaskUpdate**: Subagent tamamlanmadan ilerleme raporlar. Aktif görev listesinden görev silmek için de kullanılır.
-* **TaskOutputTool**: Son sonuçları teslim eder — yanıt özeti (UI'da max 3 satır), tam transcript dosya referansı, metrikler (token sayısı, tool kullanımı, süre).
+* **TaskOutputTool**: Son sonuçları teslim eder - yanıt özeti (UI'da max 3 satır), tam transcript dosya referansı, metrikler (token sayısı, tool kullanımı, süre).
 
 **Subagent lifecycle hook'ları:**
 
@@ -157,16 +157,16 @@ Claude otomatik olarak Explore subagent başlatabilir.
 
 Her subagent şunlarla başlar:
 
-* **Temiz context window** — önceki konuşma geçmişi yok
-* **Dosya erişimi** — parent'tan proje yolu ve ek dizinleri devralır
-* **Tool allowlist** — subagent tipine özel (Explore Edit/Write'ı engeller)
-* **Model** — varsayılan parent model; daha ucuz seviyeye override edilebilir
+* **Temiz context window** - önceki konuşma geçmişi yok
+* **Dosya erişimi** - parent'tan proje yolu ve ek dizinleri devralır
+* **Tool allowlist** - subagent tipine özel (Explore Edit/Write'ı engeller)
+* **Model** - varsayılan parent model; daha ucuz seviyeye override edilebilir
 
 **Maliyet etkisi:** Keşif için Haiku, implementation için Sonnet, orkestrasyon için Opus. Bu katmanlama, her şey için Opus kullanmaya kıyasla maliyeti %40-50 düşürebilir.
 
 ## Subagent Output
 
-Subagent tamamlandığında Claude yalnızca özeti döndürür — tam transcript ana konuşmaya girmez:
+Subagent tamamlandığında Claude yalnızca özeti döndürür - tam transcript ana konuşmaya girmez:
 
 ```
 [Subagent Result: Explore]
@@ -450,7 +450,7 @@ Hızlanma:  2.5x
 | **Context izolasyonu tek yönlü**           | Parent'ın dosya context'ini devralır ama bellek/kısmi çalışma durumu paylaşamaz   |
 | **Çalışma sırasında kullanıcı girişi yok** | Subagent'lar görev ortasında onay isteyemez, otonom çalışmalı                     |
 | **Tool izinleri devralınmaz**              | Her subagent tipi için tool'ları açıkça izin vermelisiniz                         |
-| **Paralel agent'larda race condition**     | İki agent aynı dosyayı değiştirirse sonraki üzerine yazabilir — worktree kullanın |
+| **Paralel agent'larda race condition**     | İki agent aynı dosyayı değiştirirse sonraki üzerine yazabilir - worktree kullanın |
 | **Paylaşılan bellek yok**                  | Subagent'lar long-term memory devralamaz, her biri sıfırdan başlar                |
 
 ## Debugging
@@ -485,10 +485,10 @@ Subagent'lar varsayılan 30 dakika timeout'a sahiptir. Ayarlanabilir:
 
 E-ticaret monolith'i (tek Express.js uygulaması) → 4 bağımsız microservice:
 
-* **User Service** — auth, profil, session
-* **Product Service** — katalog, stok, arama
-* **Order Service** — sipariş, ödeme, kargo
-* **Notification Service** — email, SMS, push
+* **User Service** - auth, profil, session
+* **Product Service** - katalog, stok, arama
+* **Order Service** - sipariş, ödeme, kargo
+* **Notification Service** - email, SMS, push
 
 ### Akış Diyagramı
 
@@ -566,7 +566,7 @@ Legacy e-ticaret monolith'imizi microservices'a taşıyoruz. Aşağıdaki fazlar
 multi-agent olarak fully autonomous gerçekleştir. Agent'lar shared/ klasörü
 üzerinden birbirleriyle iletişim kursun.
 
-## Faz 1 — Analiz (paralel)
+## Faz 1 - Analiz (paralel)
 
 ARCHITECT AGENT (Opus 1M):
 - Monolith codebase'ini tara (src/ altındaki tüm dosyalar)
@@ -582,7 +582,7 @@ DB MIGRATION AGENT (Opus 1M):
 - Data migration stratejisi yaz → shared/db-plan.md
 - Migration script'lerinin iskeletlerini oluştur
 
-## Faz 2 — Paralel Geliştirme (4 agent eş zamanlı)
+## Faz 2 - Paralel Geliştirme (4 agent eş zamanlı)
 
 Her service agent kendi worktree'sinde çalışsın (isolation: worktree).
 Her agent shared/contracts/ altındaki kendi OpenAPI spec'ini okuyarak başlasın.
@@ -614,7 +614,7 @@ NOTIFICATION SERVICE AGENT (Sonnet):
 - Event consumer (RabbitMQ/Redis Streams) kur
 - Unit test yaz, checklist güncelle
 
-## Faz 3 — Entegrasyon (sıralı)
+## Faz 3 - Entegrasyon (sıralı)
 
 API GATEWAY AGENT (Sonnet):
 - Tüm OpenAPI spec'leri oku
@@ -638,18 +638,18 @@ INTEGRATION TEST AGENT (Opus):
 
 | Agent            | Model   | Worktree | Tool                    | Okuduğu Shared Dosya         |
 | ---------------- | ------- | -------- | ----------------------- | ---------------------------- |
-| Architect        | Opus 1M | —        | Read, Glob, Grep, Write | Monolith src/                |
-| DB Migration     | Opus 1M | —        | Read, Grep, Write, Bash | Monolith DB schema           |
+| Architect        | Opus 1M | -        | Read, Glob, Grep, Write | Monolith src/                |
+| DB Migration     | Opus 1M | -        | Read, Grep, Write, Bash | Monolith DB schema           |
 | User Service     | Sonnet  | ✅        | Read, Edit, Write, Bash | user-service.openapi.yaml    |
 | Product Service  | Sonnet  | ✅        | Read, Edit, Write, Bash | product-service.openapi.yaml |
 | Order Service    | Sonnet  | ✅        | Read, Edit, Write, Bash | order + user/product spec    |
 | Notification     | Sonnet  | ✅        | Read, Edit, Write, Bash | notification-events.json     |
-| API Gateway      | Sonnet  | —        | Read, Edit, Write, Bash | Tüm OpenAPI spec'ler         |
-| Integration Test | Opus    | —        | Read, Write, Bash       | Tüm servisler, checklist     |
+| API Gateway      | Sonnet  | -        | Read, Edit, Write, Bash | Tüm OpenAPI spec'ler         |
+| Integration Test | Opus    | -        | Read, Write, Bash       | Tüm servisler, checklist     |
 
 ### Neden Bu Mimari Çalışıyor
 
-* **Shared contracts = agent'lar arası iletişim**: OpenAPI spec ve event schema'ları tüm agent'lar için tek kaynak gerçeğidir. Bir agent diğerinin API'sini spec'ten okuyarak client yazar — runtime'da değil, build time'da uyumluluk sağlanır.
+* **Shared contracts = agent'lar arası iletişim**: OpenAPI spec ve event schema'ları tüm agent'lar için tek kaynak gerçeğidir. Bir agent diğerinin API'sini spec'ten okuyarak client yazar - runtime'da değil, build time'da uyumluluk sağlanır.
 
 * **integration-checklist.md = senkronizasyon noktası**: Her service agent tamamladığında checklist'i günceller. Gateway agent ancak tüm satırlar işaretlendiğinde başlar.
 

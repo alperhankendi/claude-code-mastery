@@ -41,7 +41,7 @@ graph TD
 
 ## Hook Discovery & Loading
 
-Hook'lar üç seviyeden yüklenir — plugin hook'ları kurulumla birlikte anında aktif olur, tüm seviyeler hot-reload destekler:
+Hook'lar üç seviyeden yüklenir - plugin hook'ları kurulumla birlikte anında aktif olur, tüm seviyeler hot-reload destekler:
 
 ```mermaid
 graph TD
@@ -56,7 +56,7 @@ graph TD
     style ENGINE fill:#132213,stroke:#22c55e,stroke-width:2px,color:#4ade80
 ```
 
-> **Kaynak:** [DeepWiki — Hook System](https://deepwiki.com/anthropics/claude-code/3.4-hook-system)
+> **Kaynak:** [DeepWiki - Hook System](https://deepwiki.com/anthropics/claude-code/3.4-hook-system)
 
 ## Available Events
 
@@ -186,7 +186,7 @@ Hook'lar stdin üzerinden JSON alır:
 
 Tüm hook event'leri subagent veya `--agent` session'dan tetiklendiğinde `agent_id` ve `agent_type` alanlarını içerir.
 
-**Stop/SubagentStop hook'ları** ek olarak `last_assistant_message` alanı alır — Claude'un son yanıtını transcript dosyalarını parse etmeden incelemenizi sağlar:
+**Stop/SubagentStop hook'ları** ek olarak `last_assistant_message` alanı alır. Claude'un son yanıtını transcript dosyalarını parse etmeden incelemenizi sağlar:
 
 ```JSON
 {
@@ -415,7 +415,7 @@ exit 0
 
 **golangci-lint ile statik analiz:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit|Write",
@@ -427,9 +427,9 @@ exit 0
 }
 ```
 
-**Go build kontrolü — derleme hatası varsa Claude'a bildir:**
+**Go build kontrolü - derleme hatası varsa Claude'a bildir:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit|Write",
@@ -443,7 +443,7 @@ exit 0
 
 **Go race detector ile test:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit",
@@ -455,11 +455,11 @@ exit 0
 }
 ```
 
-### .NET / C#
+### .NET / C\#
 
 **dotnet format ile otomatik formatlama:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit|Write",
@@ -471,9 +471,9 @@ exit 0
 }
 ```
 
-**dotnet build — derleme kontrolü:**
+**dotnet build - derleme kontrolü:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit|Write",
@@ -487,7 +487,7 @@ exit 0
 
 **Değişen dosyanın unit testlerini çalıştır:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit",
@@ -501,7 +501,7 @@ exit 0
 
 **NuGet paketlerini doğrula (güvenlik açığı kontrolü):**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit|Write",
@@ -517,7 +517,7 @@ exit 0
 
 **ESLint + Prettier zinciri:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit|Write",
@@ -529,9 +529,9 @@ exit 0
 }
 ```
 
-**Type check — tsc ile derleme kontrolü:**
+**Type check - tsc ile derleme kontrolü:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit|Write",
@@ -547,7 +547,7 @@ exit 0
 
 **Black + Ruff formatlama:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit|Write",
@@ -561,7 +561,7 @@ exit 0
 
 **pytest ile değişen modülü test et:**
 
-```json
+```JSON
 {
   "PostToolUse": [{
     "matcher": "Edit",
@@ -594,7 +594,7 @@ hooks:
 ---
 ```
 
-`once` seçeneği (skill ve slash command'larda) hook'un session başına yalnızca bir kez çalışmasını sağlar — temizlik veya finalizasyon görevleri için kullanışlıdır.
+`once` seçeneği (skill ve slash command'larda) hook'un session başına yalnızca bir kez çalışmasını sağlar - temizlik veya finalizasyon görevleri için kullanışlıdır.
 
 ## Long-Running Sessions Strategy
 
@@ -628,7 +628,7 @@ Gece boyunca veya gözetimsiz Claude Code session'ları için, hook'ları manuel
 * **Tamamlanma kapısı:** Stop hook'ları Claude "bitti" demeden önce tüm kabul kriterlerini doğrular
 * **Bildirim:** Stop hook'ları Claude bitirdiğinde veya takıldığında Slack ile size haber verebilir
 
-## Git Context Injection Hook — Örnek Uygulama
+## Git Context Injection Hook - Örnek Uygulama
 
 ### Amaç
 
@@ -677,7 +677,7 @@ exit 0
 chmod +x .claude/hooks/inject-context.sh
 ```
 
-Claude Code'u yeniden başlatın — hook otomatik olarak her prompt'ta çalışacak.
+Claude Code'u yeniden başlatın - hook otomatik olarak her prompt'ta çalışacak.
 
 ### Çıktı Örneği
 
@@ -695,14 +695,14 @@ M  src/auth/middleware.ts
 
 ### Avantajları
 
-* **Bağlamsal farkındalık** — Claude her zaman hangi branch'te ve ne üzerinde çalıştığını bilir
-* **Otomatik enjeksiyon** — Manuel bilgi sağlamaya gerek yok
-* **Hızlı ilişkilendirme** — Commit ve dosya değişiklikleri hemen görülür
-* **Güvenlik** — Sadece proje klasörü içinde çalışır
+* **Bağlamsal farkındalık** - Claude her zaman hangi branch'te ve ne üzerinde çalıştığını bilir
+* **Otomatik enjeksiyon** - Manuel bilgi sağlamaya gerek yok
+* **Hızlı ilişkilendirme** - Commit ve dosya değişiklikleri hemen görülür
+* **Güvenlik** - Sadece proje klasörü içinde çalışır
 
 ### İleri Seviye Varyasyonlar
 
-**Detaylı versiyon — branch, commits, staged/unstaged changes ve tags:**
+**Detaylı versiyon - branch, commits, staged/unstaged changes ve tags:**
 
 ```Shell
 #!/bin/bash
@@ -722,7 +722,7 @@ echo "==================="
 exit 0
 ```
 
-**Koşullu enjeksiyon — sadece değişiklik varsa:**
+**Koşullu enjeksiyon - sadece değişiklik varsa:**
 
 ```Shell
 #!/bin/bash

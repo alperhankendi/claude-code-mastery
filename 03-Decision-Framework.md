@@ -6,11 +6,11 @@
 
 ```mermaid
 graph TD
-    START["🤔 Görev nedir?"] --> SIMPLE{"Basit mi?<br/><small>dosya arama, hızlı soru, formatlama</small>"}
-    SIMPLE -- "Evet" --> HAIKU["🟢 Haiku<br/>~$0.03/görev<br/>En hızlı"]
+    START["Görev nedir?"] --> SIMPLE{"Basit mi?<br/><small>dosya arama, hızlı soru, formatlama</small>"}
+    SIMPLE -- "Evet" --> HAIKU["Haiku<br/>~$0.03/görev<br/>En hızlı"]
     SIMPLE -- "Hayır" --> DEEP{"Derin muhakeme<br/>gerekiyor mu?<br/><small>mimari, debug, güvenlik</small>"}
-    DEEP -- "Evet" --> OPUS["🔴 Opus 4.6<br/>~$2.00/görev<br/>1M context, adaptive thinking"]
-    DEEP -- "Hayır" --> SONNET["🟡 Sonnet<br/>~$0.75/görev<br/>En iyi denge"]
+    DEEP -- "Evet" --> OPUS["Opus 4.6<br/>~$2.00/görev<br/>1M context, adaptive thinking"]
+    DEEP -- "Hayır" --> SONNET["Sonnet<br/>~$0.75/görev<br/>En iyi denge"]
 
     style HAIKU fill:#132213,stroke:#22c55e,stroke-width:2px,color:#4ade80
     style SONNET fill:#1c1208,stroke:#eab308,stroke-width:2px,color:#facc15
@@ -43,8 +43,8 @@ graph TD
 ```mermaid
 graph TD
     START["Aksiyon HER ZAMAN<br/>çalışmalı mı?"] --> ALWAYS{"Claude'un kararından<br/>bağımsız mı?"}
-    ALWAYS -- "Evet" --> HOOK["🔒 Hook — Deterministik<br/><small>Format, lint, log, .env engelle</small><br/><small>Claude atlayamaz, unutamaz</small>"]
-    ALWAYS -- "Hayır" --> PROMPT["💭 Prompt — Olasılıksal<br/><small>'Test eklemeyi düşün'</small><br/><small>'Edge case'leri kontrol et'</small><br/><small>Claude context'e göre karar verir</small>"]
+    ALWAYS -- "Evet" --> HOOK["🔒 Hook - Deterministik<br/><small>Format, lint, log, .env engelle</small><br/><small>Claude atlayamaz, unutamaz</small>"]
+    ALWAYS -- "Hayır" --> PROMPT["💭 Prompt - Olasılıksal<br/><small>'Test eklemeyi düşün'</small><br/><small>'Edge case'leri kontrol et'</small><br/><small>Claude context'e göre karar verir</small>"]
 
     style HOOK fill:#2d1117,stroke:#f85149,stroke-width:2px,color:#f85149
     style PROMPT fill:#1a1a3e,stroke:#a855f7,stroke-width:1px,color:#c084fc
@@ -52,20 +52,20 @@ graph TD
 
 ## When to Use Extended Thinking?
 
-| Durum | Extended Thinking? |
-|-------|-------------------|
-| Birçok trade-off içeren mimari karar | ✅ Evet |
-| Kök nedeni belirsiz karmaşık debugging | ✅ Evet |
-| Dikkatli muhakeme gerektiren güvenlik analizi | ✅ Evet |
-| Tanımadığınız codebase'i anlama | ✅ Evet |
-| Rutin bug fix | ❌ Hayır |
-| Basit refactoring | ❌ Hayır |
-| Kod formatlama | ❌ Hayır |
-| Hızlı sorular | ❌ Hayır |
+| Durum                                         | Extended Thinking? |
+| --------------------------------------------- | ------------------ |
+| Birçok trade-off içeren mimari karar          | ✅ Evet             |
+| Kök nedeni belirsiz karmaşık debugging        | ✅ Evet             |
+| Dikkatli muhakeme gerektiren güvenlik analizi | ✅ Evet             |
+| Tanımadığınız codebase'i anlama               | ✅ Evet             |
+| Rutin bug fix                                 | ❌ Hayır            |
+| Basit refactoring                             | ❌ Hayır            |
+| Kod formatlama                                | ❌ Hayır            |
+| Hızlı sorular                                 | ❌ Hayır            |
 
 Session içinde `Alt+T` ile açıp kapatın. Yüksek thinking budget'ı daha pahalıdır; minimumdan başlayın, yanıtlar acele hissettirirse artırın.
 
-> **Opus 4.6 adaptive thinking:** Opus 4.6, problem karmaşıklığına göre thinking derinliğini otomatik ayarlar. Çoğu görev için manuel thinking kontrolü gerekmez — zor problemlerde derinleşir, basit olanlarda hızlı kalır. Manuel thinking toggle'ı en çok Sonnet'te daha derin analiz zorlamak istediğinizde işe yarar.
+> **Opus 4.6 adaptive thinking:** Opus 4.6, problem karmaşıklığına göre thinking derinliğini otomatik ayarlar. Çoğu görev için manuel thinking kontrolü gerekmez - zor problemlerde derinleşir, basit olanlarda hızlı kalır. Manuel thinking toggle'ı en çok Sonnet'te daha derin analiz zorlamak istediğinizde işe yarar.
 
 ## Which Execution Surface?
 
@@ -88,16 +88,16 @@ graph TD
     style WEB fill:#1a1a3e,stroke:#a855f7,stroke-width:1px,color:#c084fc
 ```
 
-| Senaryo | Yüzey | Neden |
-|---------|-------|-------|
-| Hatalı test debug | Main REPL | Yerel dosyalar, iteratif |
-| 20 GitHub issue triage | Background agent | Uzun süren, yerel dosya gereksiz |
-| PR review | Subagent veya --from-pr | İzole context, odaklı çıktı |
-| Changelog oluşturma | `claude -p` | One-shot, scriptable |
-| Her commit'te lint + test | Hook (PreCommit) | Her zaman çalışmalı, deterministik |
-| Repo'lar arası pattern arama | Subagent (Explore) | Context bloat'u önler |
-| Hızlı kod açıklama | Main REPL veya /fast | İnteraktif, hızlı yanıt |
-| Multi-modül refactor | Agent team | Dosyalar arası paralel çalışma |
+| Senaryo                      | Yüzey                   | Neden                              |
+| ---------------------------- | ----------------------- | ---------------------------------- |
+| Hatalı test debug            | Main REPL               | Yerel dosyalar, iteratif           |
+| 20 GitHub issue triage       | Background agent        | Uzun süren, yerel dosya gereksiz   |
+| PR review                    | Subagent veya --from-pr | İzole context, odaklı çıktı        |
+| Changelog oluşturma          | `claude -p`             | One-shot, scriptable               |
+| Her commit'te lint + test    | Hook (PreCommit)        | Her zaman çalışmalı, deterministik |
+| Repo'lar arası pattern arama | Subagent (Explore)      | Context bloat'u önler              |
+| Hızlı kod açıklama           | Main REPL veya /fast    | İnteraktif, hızlı yanıt            |
+| Multi-modül refactor         | Agent team              | Dosyalar arası paralel çalışma     |
 
 ## Agent Teams vs Subagents vs Parallel Sessions
 
@@ -116,11 +116,11 @@ graph TD
     style PARALLEL fill:#1c1208,stroke:#eab308,stroke-width:1px,color:#facc15
 ```
 
-| Yaklaşım | Max Parallelism | Paylaşılan Context | Koordinasyon |
-|-----------|-----------------|-------------------|--------------|
-| Agent Team | 5-10 agent | Paylaşılan repo, ayrı context'ler | Opus koordine eder |
-| Subagents | Sınırsız (siz yönetirsiniz) | Yok (izole) | Prompt ile siz yönetirsiniz |
-| Parallel Sessions | Terminal sayısıyla sınırlı | Yok | Manuel |
+| Yaklaşım          | Max Parallelism             | Paylaşılan Context                | Koordinasyon                |
+| ----------------- | --------------------------- | --------------------------------- | --------------------------- |
+| Agent Team        | 5-10 agent                  | Paylaşılan repo, ayrı context'ler | Opus koordine eder          |
+| Subagents         | Sınırsız (siz yönetirsiniz) | Yok (izole)                       | Prompt ile siz yönetirsiniz |
+| Parallel Sessions | Terminal sayısıyla sınırlı  | Yok                               | Manuel                      |
 
 ## Which Hook Type?
 
@@ -151,4 +151,4 @@ graph LR
     style NORMAL fill:#1c1208,stroke:#eab308,stroke-width:2px,color:#facc15
 ```
 
-`/fast` aynı modeli (Opus 4.6) optimize edilmiş çıktı hızıyla kullanır — daha ucuz bir modele geçmez.
+`/fast` aynı modeli (Opus 4.6) optimize edilmiş çıktı hızıyla kullanır - daha ucuz bir modele geçmez.
