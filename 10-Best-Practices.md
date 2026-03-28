@@ -1,5 +1,30 @@
 # Best Practices
 
+## Projenizi 4 Katmanda Yapılandırın
+
+Claude Code'un system mimarisi 3 katmanlıdır (Core/Delegation/Extension - bkz. [01](01-Claude-Code-Complete-Guide.md#three-layer-mental-model)). Ancak **kullanıcı olarak projenizi yapılandırırken** 4 katmanlı bir yaklaşım en etkili sonucu verir:
+
+```mermaid
+graph TD
+    L1["L1: CLAUDE.md<br/>Kalıcı context ve kurallar"] --> L2["L2: Skills<br/>Otomatik bilgi paketleri"]
+    L2 --> L3["L3: Hooks<br/>Güvenlik kapıları ve otomasyon"]
+    L3 --> L4["L4: Agents<br/>Kendi context'i olan subagent'lar"]
+
+    style L1 fill:#1c1208,stroke:#eab308,stroke-width:2px,color:#facc15
+    style L2 fill:#0f2027,stroke:#3b82f6,stroke-width:1px,color:#60a5fa
+    style L3 fill:#2d1117,stroke:#f85149,stroke-width:1px,color:#f85149
+    style L4 fill:#132213,stroke:#22c55e,stroke-width:1px,color:#4ade80
+```
+
+| Katman | Ne | Neden | Rehber |
+|--------|-----|-------|--------|
+| **L1 - CLAUDE.md** | Proje context'i, kurallar, komutlar | Claude'un her session'da projeyi anlamasının temeli | [09 - Memory](09-How-Does-Memory-Work.md) |
+| **L2 - Skills** | Domain uzmanlığı (güvenlik, test, React patterns) | Context'e göre otomatik aktifleşir, tekrarı önler | [07 - Skills](07-How-Do-Skills-Work.md) |
+| **L3 - Hooks** | Formatter, linter, test, erişim engeli | Model davranışından bağımsız garanti çalışma | [04 - Hooks](04-How-To-Hooks-Work.md) |
+| **L4 - Agents** | Keşif, planlama, paralel implementation | İzole context ile büyük görevleri parçala | [06 - Subagents](06-What-are-Subagents.md) |
+
+**Pratik kural:** Önce L1'i sağlam kurun (iyi bir CLAUDE.md). Sonra L3 ile deterministik güvenceleri ekleyin (hook'lar). Ardından L2 ile tekrar eden bilgiyi skill'lere dönüştürün. Son olarak L4 ile büyük görevleri paralelize edin.
+
 ## Session Strategy
 
 Session'ları `/rename` ile isimlendirin, sonra isimle resume edin:
