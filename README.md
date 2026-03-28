@@ -25,6 +25,7 @@ Claude Code'u kullanırken ve öğrenme sürecinde edindiğim deneyimleri, okudu
 | [11](11-Common-Anti-Patterns.md) | **Anti-Patterns** | Kaçınılması gereken yaygın hatalar |
 | [12](12-Quick-Reference-Card.md) | **Quick Reference** | Komutlar, kısayollar, prefix'ler, karar kuralları |
 | [13](13-Claude-Commands.md) | **Commands** | Custom slash command oluşturma, pratik örnekler |
+| [14](14-CI-CD-Patterns.md) | **CI/CD Patterns** | GitHub Actions, headless mode, otomasyon |
 | [99](99-BMAD-Method.md) | **BMAD Method** | AI-driven agile development framework |
 
 ## Kimler İçin?
