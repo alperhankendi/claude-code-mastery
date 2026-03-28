@@ -37,9 +37,25 @@ This is a content-only repo - no build system, no tests, no application code.
 * Sidebar nav: `_includes/nav.html`
 * Prev/next: `_includes/page-nav.html`
 
+## Commands
+
+```bash
+# Local development
+bundle exec jekyll serve          # http://localhost:4000
+bundle exec jekyll serve --drafts # Include draft posts
+
+# Deploy: push to master → GitHub Pages auto-deploys
+git push origin master
+```
+
+## Adding a New Article
+
+1. Create `XX-Title-Here.md` (zero-padded number, hyphenated)
+2. Update `README.md` table
+3. Update `_includes/nav.html` (sidebar link)
+4. Update `_includes/page-nav.html` (prev/next navigation)
+
 ## TODO
-* [x] Set up git remote repository
-* [x] Enable GitHub Pages
 * [ ] LICENSE (MIT)
 * [ ] GitHub repo topics
 

@@ -72,6 +72,73 @@ When using compact, focus on:
 
 > **Kişisel tavsiye:** CLAUDE.md dosyanızı düzenli olarak güncel ve yalın tutmak büyük fark yaratır. Session sonlarında `/claude-md-management:revise-claude-md` ile o session'da öğrenilenleri otomatik olarak CLAUDE.md'ye yazdırın. Belirli aralıklarla `/claude-md-management:claude-md-improver` çalıştırarak tüm CLAUDE.md dosyalarınızı denetleyin, gereksiz maddeleri temizleyin ve kalite raporunu inceleyin. İyi bakılmış bir CLAUDE.md, Claude'un her session'da doğru kararlar almasının temelidir.
 
+## CLAUDE.md Improver ile Kalite Denetimi
+
+`/claude-md-management:claude-md-improver` skill'i CLAUDE.md dosyalarinizi otomatik olarak tarar, puanlar ve iyilestirme onerileri sunar. Ornek bir calisma:
+
+### Ilk Tarama Raporu
+
+```
+CLAUDE.md Quality Report
+
+Summary
+  Files found: 1
+  Files needing update: 1
+
+./CLAUDE.md (Project Root)
+  Score: 72/100 (Grade: B)
+
+  Criterion              Score   Notes
+  Commands/workflows      5/20   No build/serve/deploy commands documented
+  Architecture clarity   18/20   Good structure overview, file roles clear
+  Non-obvious patterns   13/15   Emoji ban, Mermaid-only, multi-file update rule documented well
+  Conciseness            15/15   Clean, dense, no fluff
+  Currency               12/15   Mostly current, TODO list partially stale
+  Actionability           9/15   Missing executable commands for common workflows
+
+  Issues:
+  - No Jekyll build/serve commands for local development
+  - No deployment workflow (push to master = auto deploy?)
+  - Missing article creation workflow (what steps to follow when adding a new guide)
+  - TODO items could be updated (README is done)
+
+  Recommended additions:
+  - Local development commands (Jekyll serve)
+  - New article checklist as actionable steps
+  - Deployment info (auto-deploy on push to master)
+```
+
+### Iyilestirme Sonrasi Yeniden Tarama
+
+Oneriler uygulandiktan sonra ayni skill tekrar calistirildiginda:
+
+```
+CLAUDE.md Quality Report (Rerun)
+
+Summary
+  Files found: 1
+  Average score: 88/100
+  Files needing update: 0
+
+./CLAUDE.md (Project Root)
+  Score: 88/100 (Grade: B+)
+
+  Criterion              Score   Notes
+  Commands/workflows     16/20   Jekyll serve + deploy documented, copy-paste ready
+  Architecture clarity   18/20   Structure, Jekyll components, nav files all mapped
+  Non-obvious patterns   13/15   Emoji ban, Mermaid-only, multi-file update rule, GPG gotcha
+  Conciseness            15/15   Dense, no fluff, every line earns its place
+  Currency               13/15   Reflects current state, TODO list clean
+  Actionability          13/15   New article checklist actionable, commands ready
+
+  Previous score: 72 -> Current score: 88 (+16)
+
+  No further updates recommended. The file covers all key areas
+  for a content-only repo effectively.
+```
+
+Bu ornek, skill'in CLAUDE.md'deki eksiklikleri somut kriterlerle olcup hedefli iyilestirmeler onerdigini gostermektedir. Duzenli olarak calistirarak CLAUDE.md kalitenizi yuksek tutabilirsiniz.
+
 ## File Imports
 
 CLAUDE.md içinde diğer dosyalara referans verin:
@@ -215,8 +282,6 @@ graph TD
 | Standard           | `tool_result` içinde inline               |
 | Büyük (eşiği aşan) | Temp dosyaya kaydet, model'e referans dön |
 | PDF (10+ sayfa)    | Hafif referans olarak dön                 |
-
-
 
 ### MCP & Skill Context Limitleri //todo: ref ver
 
