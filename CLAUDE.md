@@ -7,10 +7,11 @@ This is a content-only repo - no build system, no tests, no application code.
 
 ## Structure
 
-* `01-05*.md` - Numbered guide articles
-* `ozet.md` - Personal scratchpad/notes (not a guide)
+* `01-13*.md`, `99*.md` - Numbered guide articles (Turkish, technical terms in English)
 * `hooks.json`, `inject-context.sh` - Example hook configurations
 * `.claude/hooks/` - Project hook scripts
+* `_config.yml`, `_layouts/`, `_includes/`, `assets/` - GitHub Pages site (Jekyll + Cayman dark theme)
+* `img/` - Screenshots and images
 
 ## Conventions
 
@@ -21,5 +22,6 @@ This is a content-only repo - no build system, no tests, no application code.
 
 ## TODO
 
-* [ ] Set up git remote repository
+* [x] Set up git remote repository (alperhankendi/claude-code-mastery)
+* [x] Enable GitHub Pages
 

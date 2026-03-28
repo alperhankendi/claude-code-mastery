@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://unpkg.com/@primer/css@21/dist/primer.css">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   {% include head-custom.html %}
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
 </head>
 <body>
   {% include nav.html %}
@@ -19,6 +20,8 @@
 
   <main class="main-content" role="main">
     {{ content }}
+
+    {% include page-nav.html %}
   </main>
 
   <footer class="site-footer">
@@ -33,6 +36,55 @@
     document.querySelectorAll('nav.site-nav a').forEach(a => {
       const href = a.getAttribute('href').replace(/\/$/, '');
       if (path === href || path.endsWith(href)) a.classList.add('active');
+    });
+
+    // Search
+    let searchIndex = null;
+    let searchData = null;
+    const input = document.getElementById('search-input');
+    const resultsEl = document.getElementById('search-results');
+
+    fetch('{{ "/search.json" | relative_url }}')
+      .then(r => r.json())
+      .then(data => {
+        searchData = data;
+        searchIndex = lunr(function() {
+          this.ref('url');
+          this.field('title', { boost: 10 });
+          this.field('content');
+          data.forEach(d => this.add(d));
+        });
+      });
+
+    input.addEventListener('input', function() {
+      while (resultsEl.firstChild) resultsEl.removeChild(resultsEl.firstChild);
+      if (!searchIndex || this.value.length < 2) {
+        resultsEl.classList.remove('active');
+        return;
+      }
+      const hits = searchIndex.search(this.value + '*');
+      if (hits.length === 0) {
+        resultsEl.classList.remove('active');
+        return;
+      }
+      hits.slice(0, 8).forEach(h => {
+        const doc = searchData.find(d => d.url === h.ref);
+        const link = document.createElement('a');
+        link.href = doc.url;
+        const title = document.createElement('strong');
+        title.textContent = doc.title;
+        const snippet = document.createElement('span');
+        snippet.className = 'search-match';
+        snippet.textContent = doc.content.substring(0, 100) + '...';
+        link.appendChild(title);
+        link.appendChild(snippet);
+        resultsEl.appendChild(link);
+      });
+      resultsEl.classList.add('active');
+    });
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.nav-search')) resultsEl.classList.remove('active');
     });
   </script>
 </body>

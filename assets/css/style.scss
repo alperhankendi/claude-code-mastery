@@ -227,6 +227,112 @@ nav.site-nav a.active {
 ::-webkit-scrollbar-thumb { background: var(--bg-tertiary); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border); }
 
+/* Prev/Next navigation */
+.page-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 3rem 0 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  gap: 1rem;
+}
+
+.page-nav-prev,
+.page-nav-next {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none !important;
+  transition: all 0.2s;
+  max-width: 48%;
+}
+
+.page-nav-prev:hover,
+.page-nav-next:hover {
+  border-color: var(--accent);
+  background: var(--bg-tertiary);
+}
+
+.page-nav-next { margin-left: auto; text-align: right; }
+
+.page-nav-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.page-nav-title {
+  font-size: 0.9rem;
+  color: var(--link);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Search */
+.nav-search {
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+#search-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#search-input:focus {
+  border-color: var(--accent);
+}
+
+#search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+#search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 0 0 6px 6px;
+  max-height: 300px;
+  overflow-y: auto;
+  display: none;
+  z-index: 200;
+}
+
+#search-results.active { display: block; }
+
+#search-results a {
+  display: block;
+  padding: 8px 12px;
+  color: var(--text-primary) !important;
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+#search-results a:hover {
+  background: var(--bg-tertiary) !important;
+}
+
+#search-results .search-match {
+  color: var(--accent-light);
+  font-size: 0.75rem;
+  display: block;
+  margin-top: 2px;
+}
+
 /* Selection */
 ::selection {
   background: rgba(124, 58, 237, 0.3);

@@ -1,0 +1,14 @@
+---
+layout: null
+---
+[
+{% for page in site.pages %}
+  {% if page.name contains '.md' and page.name != 'README.md' and page.name != 'CLAUDE.md' %}
+  {
+    "title": {{ page.title | default: page.name | replace: ".md", "" | jsonify }},
+    "url": {{ page.url | relative_url | jsonify }},
+    "content": {{ page.content | strip_html | truncatewords: 200 | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+  {% endif %}
+{% endfor %}
+]

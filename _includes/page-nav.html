@@ -1,0 +1,36 @@
+{% assign pages_list = "01-Claude-Code-Complete-Guide,02-Which-Model-Should-I-Choose,03-Decision-Framework,04-How-To-Hooks-Work,05-What-is-MCP,06-What-are-Subagents,07-How-Do-Skills-Work,08-Plugin-System,09-How-Does-Memory-Work,10-Best-Practices,11-Common-Anti-Patterns,12-Quick-Reference-Card,13-Claude-Commands,99-BMAD-Method" | split: "," %}
+{% assign titles_list = "Complete Guide,Model Selection,Decision Framework,Hooks,MCP,Subagents,Skills,Plugin System,Memory & Context,Best Practices,Anti-Patterns,Quick Reference,Commands,BMAD Method" | split: "," %}
+
+{% assign current_slug = page.name | replace: ".md", "" %}
+{% assign current_index = -1 %}
+
+{% for p in pages_list %}
+  {% if p == current_slug %}
+    {% assign current_index = forloop.index0 %}
+  {% endif %}
+{% endfor %}
+
+{% if current_index >= 0 %}
+<div class="page-navigation">
+  {% assign prev_index = current_index | minus: 1 %}
+  {% assign next_index = current_index | plus: 1 %}
+
+  {% if prev_index >= 0 %}
+    <a href="{{ pages_list[prev_index] | relative_url }}" class="page-nav-prev">
+      <span class="page-nav-label">Onceki</span>
+      <span class="page-nav-title">{{ titles_list[prev_index] }}</span>
+    </a>
+  {% else %}
+    <span></span>
+  {% endif %}
+
+  {% if next_index < pages_list.size %}
+    <a href="{{ pages_list[next_index] | relative_url }}" class="page-nav-next">
+      <span class="page-nav-label">Sonraki</span>
+      <span class="page-nav-title">{{ titles_list[next_index] }}</span>
+    </a>
+  {% else %}
+    <span></span>
+  {% endif %}
+</div>
+{% endif %}
