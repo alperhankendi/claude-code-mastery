@@ -134,6 +134,4 @@ allowed-tools: Bash(git:*, gh:*), Read
 | **Örnek**     | `/deploy`, `/gh-release` | Güvenlik pattern'ları | Format sonrası lint |
 
 > **Kural:** Zamanlamayı kontrol etmek istiyorsanız command, otomatik uygulanmasını istiyorsanız skill, her zaman çalışmasını istiyorsanız hook kullanın.
->
->
 

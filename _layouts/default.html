@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr" data-color-mode="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: site.title }}</title>
+  <link rel="stylesheet" href="https://unpkg.com/@primer/css@21/dist/primer.css">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% include head-custom.html %}
+</head>
+<body>
+  {% include nav.html %}
+
+  <header class="page-header" role="banner">
+    <h1 class="project-name">{{ site.title }}</h1>
+    <h2 class="project-tagline">{{ site.description }}</h2>
+    <a href="{{ site.github.repository_url }}" class="btn">GitHub</a>
+  </header>
+
+  <main class="main-content" role="main">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <span class="site-footer-credits">
+      <a href="{{ site.github.repository_url }}">{{ site.title }}</a> by {{ site.github.owner_name }}
+    </span>
+  </footer>
+
+  <script>
+    // Highlight active nav link
+    const path = window.location.pathname.replace(/\/$/, '');
+    document.querySelectorAll('nav.site-nav a').forEach(a => {
+      const href = a.getAttribute('href').replace(/\/$/, '');
+      if (path === href || path.endsWith(href)) a.classList.add('active');
+    });
+  </script>
+</body>
+</html>
