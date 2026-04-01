@@ -27,6 +27,7 @@ Claude Code'u kullanırken ve öğrenme sürecinde edindiğim deneyimleri, okudu
 | [13](13-Claude-Commands.md) | **Commands** | Custom slash command oluşturma, pratik örnekler |
 | [14](14-CI-CD-Patterns.md) | **CI/CD Patterns** | GitHub Actions, headless mode, otomasyon |
 | [15](15-Agentic-Coding-Frameworks.md) | **Agentic Coding Frameworks** | BMAD, SpecKit, OpenSpec, GSD, Superpowers karsilastirmasi |
+| [16](16-Runbooks.md) | **Runbooks** | Runbook kavramı, Claude Code entegrasyonu, deploy/incident/migration ornekleri |
 | [99](99-BMAD-Method.md) | **BMAD Method** | AI-driven agile development framework |
 | [98](98-SpecKit.md) | **SpecKit** | GitHub's gated specification process |
 | [97](97-OpenSpec.md) | **OpenSpec** | Brownfield-first delta specification yaklaşımı |
